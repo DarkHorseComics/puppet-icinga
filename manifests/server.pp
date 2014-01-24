@@ -12,7 +12,11 @@
 #set IDO2DB to yes in /etc/icinga/default
 #Perms are -rw-r--r-- 1 root root 340 Jan 23 22:38 /etc/default/icinga
 
+#/etc/icinga/idomod.cfg
+#-rw-r--r-- 1 root root 8.7K Nov  6 19:49 /etc/icinga/idomod.cfg
 
+#/etc/icinga/modules/idoutils.cfg
+#-rw-r--r-- 1 root root 1.3K Jan 23 22:22 /etc/icinga/modules/idoutils.cfg
 
 #/etc/icinga/icinga.cfg
 #Perms: -rw-r--r-- 1 root root 51K Jan 23 22:40 /etc/icinga/icinga.cfg
