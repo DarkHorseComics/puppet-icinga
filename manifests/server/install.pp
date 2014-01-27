@@ -38,4 +38,15 @@ class icinga::server::install::repos {
 #Packages
 ##################
 class icinga::server::install::packages {
+
+  #Pick the right list of packages
+  case $operatingsystem {
+    #Red Hat/CentOS systems:
+    'RedHat', 'CentOS': {} 
+    #Debian/Ubuntu systems: 
+    /^(Debian|Ubuntu)$/: {}
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") } 
+  }
+
 }
