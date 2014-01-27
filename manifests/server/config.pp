@@ -3,3 +3,7 @@
 # This class manages configuration for Icinga servers.
 #
 # Parameters:
+
+class icinga::server::config {
+
+}
