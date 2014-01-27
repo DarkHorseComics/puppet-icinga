@@ -48,7 +48,9 @@ class icinga::server::install::packages {
         'mysql':    { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
         'postgres': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
         default: { fail("${icinga::params::server_db_type} is not supported!") } 
-      } 
+      }
+      
+      $package_provider = 'yum'
     } 
     #Debian/Ubuntu systems: 
     /^(Debian|Ubuntu)$/: {
@@ -57,7 +59,9 @@ class icinga::server::install::packages {
         'mysql':    { $lib_db_package = 'libdbd-mysql'}
         'postgres': { $lib_db_package = 'libdbd-pgsql'}
         default: { fail("${icinga::params::server_db_type} is not supported!") } 
-      }      
+      }
+      
+      $package_provider = 'apt'
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
