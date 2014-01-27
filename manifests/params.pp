@@ -1,4 +1,4 @@
-# Class: icinga::server::service
+# Class: icinga::server::params
 #
 # This class manges the parameters used to configure the server components of Icinga.
 #

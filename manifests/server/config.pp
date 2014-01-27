@@ -6,4 +6,6 @@
 
 class icinga::server::config {
 
+  include icinga::params
+
 }
