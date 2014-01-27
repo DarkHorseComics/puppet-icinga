@@ -17,8 +17,14 @@ class icinga::server::install {
   case $operatingsystem {
     #Add the yum repo for Red Had and CentOS systems:
     'RedHat', 'CentOS': {} 
+    
     #Add the Icinga PPA for Debian/Ubuntu systems:
-    /^(Debian|Ubuntu)$/: {}
+    /^(Debian|Ubuntu)$/: { 
+      #Include the apt module's base class so we can...
+      include apt
+      #...use the module to add the Icinga PPA:
+      apt::ppa { 'ppa:formorer/icinga': }
+    }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
   }
