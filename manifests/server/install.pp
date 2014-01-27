@@ -42,7 +42,13 @@ class icinga::server::install::packages {
   #Pick the right list of packages
   case $operatingsystem {
     #Red Hat/CentOS systems:
-    'RedHat', 'CentOS': {} 
+    'RedHat', 'CentOS': {
+      case $icinga::params::server_db_type {
+        'mysql':    { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
+        'postgres': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
+        default: { fail("${icinga::params::server_db_type} is not supported!") } 
+      } 
+    } 
     #Debian/Ubuntu systems: 
     /^(Debian|Ubuntu)$/: {
       #Pick the right DB lib package name based on the database type the user selected:
