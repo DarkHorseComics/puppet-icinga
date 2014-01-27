@@ -19,6 +19,11 @@ class icinga::server::install {
   #Here, we're setting up the package repos first, then installing the packages:
   class{'icinga::server:install::repos':} ~> class{'icinga::server:install::packages':} -> Class['icinga::server:install']
 
+
+}
+
+class icinga::server::install::repos { 
+
   ##################
   #Package repositories
   ##################
@@ -36,8 +41,7 @@ class icinga::server::install {
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
   }
-}
 
-class icinga::server::install::repos { }
+}
 
 class icinga::server::install::packages { }
