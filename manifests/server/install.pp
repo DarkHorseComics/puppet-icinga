@@ -8,6 +8,7 @@ class icinga::server::install {
   #class on the right.
   #
   #Here, we're setting up the package repos first, then installing the packages:
+  include icinga::params
   class{'icinga::server::install::repos':} ~> class{'icinga::server::install::packages':} -> Class['icinga::server::install']
 
 }
