@@ -43,6 +43,7 @@ class icinga::server::install::packages {
   case $operatingsystem {
     #Red Hat/CentOS systems:
     'RedHat', 'CentOS': {
+      #Pick the right DB lib package name based on the database type the user selected:
       case $icinga::params::server_db_type {
         'mysql':    { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
         'postgres': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
