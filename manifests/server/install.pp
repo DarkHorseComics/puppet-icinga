@@ -62,6 +62,7 @@ class icinga::server::install::packages {
       }
       
       $package_provider = 'apt'
+      $icinga_packages = ["icinga", "icinga-doc", "icinga-idoutils", $lib_db_package]
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
