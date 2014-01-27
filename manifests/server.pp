@@ -35,3 +35,9 @@
 #load DB schema
 
 # su postgres -c 'psql -d icinga < /usr/share/dbconfig-common/data/icinga-idoutils/install/pgsql'
+
+class icinga::server {
+  include icinga::server::install
+  include icinga::server::config
+  include icinga::server::service
+}
