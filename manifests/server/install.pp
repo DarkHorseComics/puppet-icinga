@@ -67,7 +67,12 @@ class icinga::server::install::packages {
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
   }
-  
+
+  #Install the packages we specified above:
+  package {$icinga_packages:
+    ensure   => installed,
+    provider => $package_provider,
+  }  
   #for debugging:
   notify {"DB lib package is: ${lib_db_package}":}
 
