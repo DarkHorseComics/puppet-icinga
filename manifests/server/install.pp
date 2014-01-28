@@ -78,4 +78,11 @@ class icinga::server::install::packages {
 
 class icinga::server::install::execs {
 
+  case $operatingsystem {
+    #Exec resources for Red Hat/CentOS systems
+    'RedHat', 'CentOS': {}
+    #Exec resources for Debian/Ubuntu systems
+    /^(Debian|Ubuntu)$/: {}
+  }
+
 }
