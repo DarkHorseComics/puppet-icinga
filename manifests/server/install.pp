@@ -46,7 +46,7 @@ class icinga::server::install::packages {
       #Pick the right DB lib package name based on the database type the user selected:
       case $icinga::params::server_db_type {
         'mysql':    { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
-        'postgres': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
+        'pgsql': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
         default: { fail("${icinga::params::server_db_type} is not supported!") }
       }
       
@@ -57,7 +57,7 @@ class icinga::server::install::packages {
       #Pick the right DB lib package name based on the database type the user selected:
       case $icinga::params::server_db_type {
         'mysql':    { $lib_db_package = 'libdbd-mysql'}
-        'postgres': { $lib_db_package = 'libdbd-pgsql'}
+        'pgsql': { $lib_db_package = 'libdbd-pgsql'}
         default: { fail("${icinga::params::server_db_type} is not supported!") } 
       }
       
@@ -96,7 +96,7 @@ class icinga::server::install::execs {
       #This case statement loads the DB schema for the appropriate database the user picked in params.pp:
       case $icinga::params::server_db_type {
         'mysql':    {}
-        'postgres': {
+        'pgsql': {
           exec { 'debianubuntu-postgres-schema-load':
             user    => 'root',
             path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
