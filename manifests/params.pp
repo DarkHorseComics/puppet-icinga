@@ -13,16 +13,17 @@ class icinga::params {
   #server_db_password is left blank deliberately.
   #Since putting database passwords in your manifests/modules is a bad idea,
   #you should get the DB password via a Hiera lookup.
-  $server_db_type        = 'postgres'
-  $server_db_host        = 'localhost'
-  $server_db_port        = '5432'
-  $server_db_user        = 'icinga'
-  $server_db_password    = undef
+  $server_db_type       = 'postgres'
+  $server_db_host       = 'localhost'
+  $server_db_port       = '5432'
+  $server_db_user       = 'icinga'
+  $server_db_password   = undef
+  $server_db_name       = 'icinga' 
   
   ##################
   #Icinga settings
   ##################
   
-  $icingaadmin_password  = 'horsebatterystaple'
+  $icingaadmin_password = 'horsebatterystaple'
 
 }
