@@ -82,7 +82,17 @@ class icinga::server::install::execs {
     #Exec resources for Red Hat/CentOS systems
     'RedHat', 'CentOS': {}
     #Exec resources for Debian/Ubuntu systems
-    /^(Debian|Ubuntu)$/: {}
+    /^(Debian|Ubuntu)$/: {
+      #dpkg override commands; these let the nagios user access some Icinga folders necessary
+      #for the web UI to work:   
+      exec { 'dpkg-overrides':
+        user    => 'root',
+        path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
+        command => "dpkg-statoverride --update --add nagios www-data 2710 /var/lib/icinga/rw; dpkg-statoverride --update --add nagios nagios 751 /var/lib/icinga; touch /etc/icinga/dpkg_override_done.txt",
+        creates => "/etc/icinga/dpkg_override_done.txt",
+        require => Class['icinga::server::install::packages'],
+      }
+    }
   }
 
 }
