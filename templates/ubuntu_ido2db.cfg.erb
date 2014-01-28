@@ -18,12 +18,12 @@
 # Currently supported:
 # libdbi: mysql, pgsql
 # ocilib: oracle
-db_servertype=
+db_servertype=<%= scope.lookupvar('icinga::params::server_db_type') %>
 
 # DATABASE HOST
 # This option specifies what host the DB server is running on.
 # Note: Oracle will ignore this setting
-db_host=localhost
+db_host=<%= scope.lookupvar('icinga::params::server_db_host') %>
 # DATABASE PORT
 # This option specifies the port that the DB server is running on.
 # Values:
@@ -33,7 +33,7 @@ db_host=localhost
 #
 # Note: ocilib will ignore this, you have to modify your tnsnames.ora
 
-db_port=
+db_port=<%= scope.lookupvar('icinga::params::server_db_port') %>
 
 # DATABASE NAME
 # This option specifies the name of the database that should be used.
@@ -44,7 +44,7 @@ db_port=
 #   //DBSERVER/SID
 # SID
 
-db_name=
+db_name=<%= scope.lookupvar('icinga::params::server_db_name') %>
 
 
 
@@ -63,5 +63,5 @@ db_prefix=icinga_
 # The user needs at least SELECT, INSERT, UPDATE, and DELETE privileges on
 # the database.
 
-db_user=
-db_pass=
+db_user=<%= scope.lookupvar('icinga::params::server_db_user') %>
+db_pass=<%= scope.lookupvar('icinga::params::server_db_password') %>
