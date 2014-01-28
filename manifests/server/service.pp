@@ -7,5 +7,16 @@
 class icinga::server::service {
 
   include icinga::params
+  
+  case $operatingsystem {
+    #Daemon names for Red Had/CentOS systems:
+    'RedHat', 'CentOS': {}
+    #Daemon names for Debian/Ubuntu systems:
+    /^(Debian|Ubuntu)$/: {
+      $service_names = ["icinga", "ido2db"]
+    }
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") }
+  }
 
 }
