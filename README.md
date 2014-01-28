@@ -26,7 +26,17 @@ Coming soon...
 
 ##Setup
 
-Coming soon...
+###Requirements
+
+####Puppet module requirements
+
+This module requires the [httpauth](https://github.com/jamtur01/puppet-httpauth) module. It uses the type provided by the module to create users in the `htpasswd` file that Icinga uses for authentication.
+
+If you don't already have it in your collection of modules, install it from the [Puppet Forge](https://forge.puppetlabs.com/):
+
+<pre>
+puppet module install jamtur01/httpauth
+</pre>
 
 ##Usage
 
