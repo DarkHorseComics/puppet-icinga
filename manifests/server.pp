@@ -37,14 +37,15 @@
 # su postgres -c 'psql -d icinga < /usr/share/dbconfig-common/data/icinga-idoutils/install/pgsql'
 
 class icinga::server (
-  $server_db_type       = icinga::params::server_db_type,
-  $server_db_host       = icinga::params::server_db_host,
-  $server_db_port       = icinga::params::server_db_port,
-  $server_db_user       = icinga::params::server_db_user,
-  $server_db_password   = icinga::params::server_db_password,
-  $server_db_name       = icinga::params::server_db_name,
+  $server_db_type       = $icinga::params::server_db_type,
+  $server_db_host       = $icinga::params::server_db_host,
+  $server_db_port       = $icinga::params::server_db_port,
+  $server_db_user       = $icinga::params::server_db_user,
+  $server_db_password   = $icinga::params::server_db_password,
+  $server_db_name       = $icinga::params::server_db_name
 
 ) {
+  
   include icinga::params
   include icinga::server::install
   include icinga::server::config
