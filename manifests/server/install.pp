@@ -96,7 +96,15 @@ class icinga::server::install::execs {
       #This case statement loads the DB schema for the appropriate database the user picked in params.pp:
       case $icinga::params::server_db_type {
         'mysql':    {}
-        'postgres': {}
+        'postgres': {
+          exec { 'debianubuntu-postgres-schema-load':
+            user    => 'root',
+            path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
+            command => "su postgres -c 'psql -d icinga < /usr/share/dbconfig-common/data/icinga-idoutils/install/pgsql'; touch /etc/icinga/postgres_schema_loaded.txt",
+            creates => "/etc/icinga/postgres_schema_loaded.txt",
+            require => Class['icinga::server::install::packages'],
+          }
+        }
         default: { fail("${icinga::params::server_db_type} is not supported!") }
       }
     }
