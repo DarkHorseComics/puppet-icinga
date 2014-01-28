@@ -44,9 +44,8 @@ class icinga::server (
   $server_db_password   = $icinga::params::server_db_password,
   $server_db_name       = $icinga::params::server_db_name
 
-) {
+) inherits icinga::params {
   
-  include icinga::params
   include icinga::server::install
   include icinga::server::config
   include icinga::server::service
