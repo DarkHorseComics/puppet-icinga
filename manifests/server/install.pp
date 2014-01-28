@@ -109,4 +109,5 @@ class icinga::server::install::execs {
       }
     }
   }
+  
 }

@@ -18,4 +18,14 @@ class icinga::server::config {
     ensure    => present,
   }
 
+  case $operatingsystem {
+    #File and template variable names for Red Had/CentOS systems:
+    'RedHat', 'CentOS': {}
+    #File and template variable names for Debian/Ubuntu systems:
+    /^(Debian|Ubuntu)$/: {
+      $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
+    }
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") }
+  }
 }
