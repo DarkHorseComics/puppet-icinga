@@ -21,7 +21,8 @@ class icinga::server::service {
   
   #Service resource that references the daemon names we defined above:
   service {$service_names:
-    ensure => running,
+    ensure    => running,
+    subscribe => Class['icinga::server::config'],
   }
 
 }
