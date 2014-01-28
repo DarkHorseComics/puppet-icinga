@@ -24,6 +24,7 @@ class icinga::server::config {
     #File and template variable names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
       $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
+      $ido2db_cfg_template = "icinga/ubuntu_ido2db.cfg.erb"
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
@@ -47,6 +48,16 @@ class icinga::server::config {
     group   => 'root',
     mode    => '644',
     content => template('icinga/icinga.cfg.erb'),
+  }
+
+  #/etc//etc/icinga/ido2db.cfg
+  file { '/etc/icinga/ido2db.cfg':
+    path    => '/etc/icinga/ido2db.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '600',
+    content => template($ido2db_cfg_template),
   }
 
 }
