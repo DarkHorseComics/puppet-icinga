@@ -39,4 +39,14 @@ class icinga::server::config {
     content => template($etc_default_template),
   }
 
+  #/etc/icinga/icinga.cfg resource
+  file { '/etc/icinga/icinga.cfg':
+    path    => '/etc/icinga/icinga.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template('icinga/icinga.cfg.erb'),
+  }
+
 }
