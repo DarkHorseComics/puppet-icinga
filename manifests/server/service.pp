@@ -18,5 +18,10 @@ class icinga::server::service {
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
   }
+  
+  #Service resource that references the daemon names we defined above:
+  service {$service_names:
+    ensure => running,
+  }
 
 }
