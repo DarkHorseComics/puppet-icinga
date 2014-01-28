@@ -72,8 +72,6 @@ class icinga::server::install::packages {
   package {$icinga_packages:
     ensure   => installed,
     provider => $package_provider,
-  }  
-  #for debugging:
-  notify {"DB lib package is: ${lib_db_package}":}
+  }
 
 }
