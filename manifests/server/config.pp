@@ -59,5 +59,24 @@ class icinga::server::config {
     mode    => '600',
     content => template($ido2db_cfg_template),
   }
+  
+  #/etc/icinga/modules/idoutils.cfg
+  file { '/etc/icinga/modules/idoutils.cfg':
+    path    => '/etc/icinga/modules/idoutils.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template('icinga/idoutils.cfg.erb'),
+  }
 
+  #/etc/icinga/idomod.cfg
+  file { '/etc/icinga/idomod.cfg':
+    path    => '/etc/icinga/idomod.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template('icinga/idomod.cfg.erb'),
+  }
 }
