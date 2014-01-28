@@ -28,4 +28,15 @@ class icinga::server::config {
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
   }
+
+  #/etc/default/icinga resource
+  file { '/etc/default/icinga':
+    path    => '/etc/default/icinga',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template($etc_default_template),
+  }
+
 }
