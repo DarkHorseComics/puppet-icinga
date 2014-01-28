@@ -19,5 +19,10 @@ class icinga::params {
   $server_db_user        = 'icinga'
   $server_db_password    = undef
   
+  ##################
+  #Icinga settings
+  ##################
+  
+  $icingaadmin_password  = 'horsebatterystaple'
 
 }
