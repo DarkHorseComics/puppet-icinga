@@ -47,7 +47,7 @@ class icinga::server::install::packages {
       case $icinga::params::server_db_type {
         'mysql':    { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
         'postgres': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
-        default: { fail("${icinga::params::server_db_type} is not supported!") } 
+        default: { fail("${icinga::params::server_db_type} is not supported!") }
       }
       
       $package_provider = 'yum'
@@ -92,7 +92,13 @@ class icinga::server::install::execs {
         creates => "/etc/icinga/dpkg_override_done.txt",
         require => Class['icinga::server::install::packages'],
       }
+      
+      #This case statement loads the DB schema for the appropriate database the user picked in params.pp:
+      case $icinga::params::server_db_type {
+        'mysql':    {}
+        'postgres': {}
+        default: { fail("${icinga::params::server_db_type} is not supported!") }
+      }
     }
   }
-
 }
