@@ -18,6 +18,14 @@ class icinga::server::config {
     ensure    => present,
   }
 
+  file { '/etc/icinga/htpasswd.users':
+    path    => '/etc/icinga/htpasswd.users',
+    ensure  => file,
+    owner   => 'www-data',
+    group   => 'www-data',
+    mode    => '644',
+  }
+
   case $operatingsystem {
     #File and template variable names for Red Had/CentOS systems:
     'RedHat', 'CentOS': {}
