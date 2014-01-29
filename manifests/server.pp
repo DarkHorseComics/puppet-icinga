@@ -46,7 +46,8 @@ class icinga::server (
 
 ) inherits icinga::params {
   
-  include icinga::server::install
-  include icinga::server::config
-  include icinga::server::service
+  #Run these in the right order:
+  class {'icinga::server::install':} ~>
+  class {'icinga::server::config':} ~>
+  class {'icinga::server::service':}
 }
