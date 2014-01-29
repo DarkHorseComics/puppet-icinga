@@ -16,9 +16,9 @@ class icinga::params {
   $server_db_type       = 'pgsql'
   $server_db_host       = 'localhost'
   $server_db_port       = '5432'
-  $server_db_user       = 'icinga'
+  $server_db_user       = 'icingaidoutils'
   $server_db_password   = undef
-  $server_db_name       = 'icinga' 
+  $server_db_name       = 'icinga'
   
   ##################
   #Icinga settings
