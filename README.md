@@ -26,7 +26,56 @@ Coming soon...
 
 ##Setup
 
-Coming soon...
+###Requirements
+
+####Puppet module requirements
+
+This module requires the [httpauth](https://github.com/jamtur01/puppet-httpauth) module. It uses the type provided by the module to create users in the `htpasswd` file that Icinga uses for authentication.
+
+If you don't already have it in your collection of modules, install it from the [Puppet Forge](https://forge.puppetlabs.com/):
+
+<pre>
+puppet module install jamtur01/httpauth
+</pre>
+
+####Other requirements
+
+**Database**
+
+Icinga requires a database, either local or remote.
+
+By default, the Debian/Ubuntu Icinga packages themselves will install MySQL, create a database and tables, an Icinga database user and will set up Icinga with the connection settings.
+
+This module defaults to using Postgres. Like MySQL, the Icinga packages will install and configure Postgres for Icinga, including creating the database, tables and user.
+
+If you would like to set up your own database, either of the Puppet Labs [MySQL](https://github.com/puppetlabs/puppetlabs-mysql) or [Postgres](https://github.com/puppetlabs/puppetlabs-postgresql) modules can be used. 
+
+The example below shows the Puppet Labs Postgres module being used to install Postgres and create a database and database user for Icinga:
+
+<pre>
+  class { 'postgresql::server': }
+
+  postgresql::server::db { 'icinga':
+    user     => 'icingaidoutils',
+    password => postgresql_password('icingaidoutils', 'password'),
+  }
+</pre>
+
+For production use, you'll probably want to get the database password via a [Hiera lookup](http://docs.puppetlabs.com/hiera/1/puppet.html) so the password isn't sitting in your site manifests in plain text.
+
+To configure Icinga with the password you set up for the Postgres Icinga user, use the `server_db_password` parameter (shown here with a Hiera lookup):
+
+<pre>
+  class { 'icinga::server':
+    server_db_password => hiera('icinga_db_password_key_here')
+  }
+</pre>
+
+**Webserver**
+
+Icinga requires a web server for the web UI. The Icinga packages automatically install Apache 2 and set up Icinga to be served by Apache at the [/icinga](/icinga) path of your Icinga server (eg. [http://icinga.company.com/icinga](http://icinga.company.com/icinga)).
+
+This module currently does not set up any Apache virtual host for Icinga.
 
 ##Usage
 
@@ -48,7 +97,9 @@ Coming soon...
 
 ##Limitations
 
-Coming soon...
+Currently, Red Hat/CentOS based systems are not supported.
+
+Currently, remote databases are not supported.
 
 ##Copyright and License
 
