@@ -71,6 +71,12 @@ To configure Icinga with the password you set up for the Postgres Icinga user, u
   }
 </pre>
 
+**Webserver**
+
+Icinga requires a web server for the web UI. The Icinga packages automatically install Apache 2 and set up Icinga to be served by Apache at the [/icinga](/icinga) path of your Icinga server (eg. [http://icinga.company.com/icinga](http://icinga.company.com/icinga)).
+
+This module currently does not set up any Apache virtual host for Icinga.
+
 ##Usage
 
 Coming soon...
