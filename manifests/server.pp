@@ -46,7 +46,9 @@ class icinga::server (
 
 ) inherits icinga::params {
   
-  #Run these in the right order:
+  #Apply our classes in the right order. Use the squiggly arrows (~>) to ensure that the 
+  #class left is applied before the class on the right and that it also refreshes the 
+  #class on the right.
   class {'icinga::server::install':} ~>
   class {'icinga::server::config':} ~>
   class {'icinga::server::service':}
