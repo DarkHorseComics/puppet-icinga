@@ -108,4 +108,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for hostgroup definitions:
+  file { '/etc/icinga/objects/hostgroups':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
