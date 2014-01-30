@@ -21,8 +21,8 @@ class icinga::server::config {
   file { '/etc/icinga/htpasswd.users':
     path    => '/etc/icinga/htpasswd.users',
     ensure  => file,
-    owner   => 'www-data',
-    group   => 'www-data',
+    owner   => $icinga::params::htpasswdusers_owner,
+    group   => $icinga::params::htpasswdusers_group,
     mode    => '644',
   }
 

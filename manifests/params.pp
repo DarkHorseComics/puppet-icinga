@@ -35,7 +35,9 @@ class icinga::params {
     #File and template variable names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
       $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
-      $ido2db_cfg_template = "icinga/ubuntu_ido2db.cfg.erb"
+      $ido2db_cfg_template  = "icinga/ubuntu_ido2db.cfg.erb"
+      $htpasswdusers_owner  = "www-data"
+      $htpasswdusers_group = "www-data"
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
