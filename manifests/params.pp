@@ -29,6 +29,18 @@ class icinga::params {
   
   $icingaadmin_password = 'horsebatterystaple'
   
+  case $operatingsystem {
+    #File and template variable names for Red Had/CentOS systems:
+    'RedHat', 'CentOS': {}
+    #File and template variable names for Debian/Ubuntu systems:
+    /^(Debian|Ubuntu)$/: {
+      $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
+      $ido2db_cfg_template = "icinga/ubuntu_ido2db.cfg.erb"
+    }
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") }
+  }
+  
   ##################
   # Package parameters
 
