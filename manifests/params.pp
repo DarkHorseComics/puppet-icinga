@@ -13,7 +13,6 @@ class icinga::params {
  
   ##################
   # Database settings
-  
   #The server_db_password is left blank deliberately.
   #Since putting database passwords in your manifests/modules is a bad idea,
   #you should get the DB password via a Hiera lookup.
@@ -26,7 +25,6 @@ class icinga::params {
   
   ##################
   # Icinga settings
-  
   $icingaadmin_password = 'horsebatterystaple'
   
   case $operatingsystem {
@@ -45,7 +43,35 @@ class icinga::params {
   
   ##################
   # Package parameters
-
+  case $operatingsystem {
+    #Red Hat/CentOS systems:
+    'RedHat', 'CentOS': {
+      #Pick the right DB lib package name based on the database type the user selected:
+      case $icinga::params::server_db_type {
+        'mysql': { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
+        'pgsql': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
+        default: { fail("${icinga::params::server_db_type} is not supported!") }
+      }
+      
+      #Pick the right pacakage provider:
+      $package_provider = 'yum'
+    } 
+    #Debian/Ubuntu systems: 
+    /^(Debian|Ubuntu)$/: {
+      #Pick the right DB lib package name based on the database type the user selected:
+      case $icinga::params::server_db_type {
+        'mysql': { $lib_db_package = 'libdbd-mysql'}
+        'pgsql': { $lib_db_package = 'libdbd-pgsql'}
+        default: { fail("${icinga::params::server_db_type} is not supported!") } 
+      }
+      #Pick the right pacakage provider:
+      $package_provider = 'apt'
+      #Finally, pick the right list of packages:
+      $icinga_packages  = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
+    }
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") } 
+  }
 
 
 }
