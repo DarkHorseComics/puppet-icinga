@@ -84,4 +84,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for command definitions:
+  file { '/etc/icinga/objects/commands':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
