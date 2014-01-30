@@ -132,4 +132,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for template definitions:
+  file { '/etc/icinga/objects/templates':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
