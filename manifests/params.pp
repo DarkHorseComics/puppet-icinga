@@ -91,7 +91,7 @@ class icinga::params {
     'RedHat', 'CentOS': {}
     #Daemon names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
-      $service_names = ["icinga", "ido2db"]
+      $server_service_names = ["icinga", "ido2db"]
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
