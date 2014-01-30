@@ -76,6 +76,16 @@ class icinga::server::config {
     content => template('icinga/idomod.cfg.erb'),
   }
   
+  #/etc/icinga/cgi.cfg
+  file { '/etc/icinga/cgi.cfg':
+    path    => '/etc/icinga/cgi.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template('icinga/cgi.cfg.erb'),
+  }
+
   #This folder is the base of where all of Icinga's objects are kept:
   file { '/etc/icinga/objects':
     ensure  => directory,
