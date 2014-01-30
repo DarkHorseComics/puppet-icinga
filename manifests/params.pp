@@ -35,12 +35,17 @@ class icinga::params {
       $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
       $ido2db_cfg_template  = "icinga/ubuntu_ido2db.cfg.erb"
       $htpasswdusers_owner  = "www-data"
-      $htpasswdusers_group = "www-data"
+      $htpasswdusers_group  = "www-data"
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
   }
-  
+
+  ##################
+  # Icinga web parameters
+  #How often to automatically refresh the web UI, in seconds: 
+  $web_ui_refresh_rate = "90"
+
   ##################
   # Package parameters
   case $operatingsystem {

@@ -107,7 +107,7 @@ http_charset=utf-8
 # This option allows you to specify the refresh rate in seconds
 # of various CGIs (extinfo, outages, status, statusmap and tac).
 
-refresh_rate=90
+refresh_rate=<%= scope.lookupvar('icinga::server::web_ui_refresh_rate') %>
 
 
 
