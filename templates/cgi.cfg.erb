@@ -136,7 +136,7 @@ escape_html_tags=1
 # all entries by default set this value to 0.
 # Default is 50.
 
-result_limit=50
+result_limit=<%= scope.lookupvar('icinga::server::web_ui_results_per_page_limit') %>
 
 
 

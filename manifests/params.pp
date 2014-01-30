@@ -45,6 +45,8 @@ class icinga::params {
   # Icinga web parameters
   #How often to automatically refresh the web UI, in seconds: 
   $web_ui_refresh_rate = "90"
+  #How many results in large lists of hosts, services or check results to display per page: 
+  $web_ui_results_per_page_limit = "50"
 
   ##################
   # Package parameters
