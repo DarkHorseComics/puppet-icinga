@@ -75,4 +75,13 @@ class icinga::server::config {
     mode    => '644',
     content => template('icinga/idomod.cfg.erb'),
   }
+  
+  #This folder is the base of where all of Icinga's objects are kept:
+  file { '/etc/icinga/objects':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
