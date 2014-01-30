@@ -25,6 +25,8 @@ class icinga::params {
   
   ##################
   # Icinga settings
+  #The default icingaadmin password.
+  #Default value from: https://xkcd.com/936/
   $icingaadmin_password = 'horsebatterystaple'
   
   case $operatingsystem {
