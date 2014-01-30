@@ -151,4 +151,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for image icon files:
+  file { '/etc/icinga/objects/icons':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
