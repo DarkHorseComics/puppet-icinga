@@ -100,4 +100,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for host definitions:
+  file { '/etc/icinga/objects/hosts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
