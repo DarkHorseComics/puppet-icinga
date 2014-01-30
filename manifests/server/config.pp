@@ -116,4 +116,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for service definitions:
+  file { '/etc/icinga/objects/services':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
