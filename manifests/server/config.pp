@@ -92,4 +92,12 @@ class icinga::server::config {
     mode    => '755',
   }
 
+  #A folder for contact definitions:
+  file { '/etc/icinga/objects/contacts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }
