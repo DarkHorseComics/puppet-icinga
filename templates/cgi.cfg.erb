@@ -171,7 +171,7 @@ first_day_of_week=0
 # This option determines the character which should act as
 # delimiter. Default is ";".
 
-#csv_delimiter=;
+csv_delimiter=<%= scope.lookupvar('icinga::server::exported_csv_delimiter_char') %>
 
 
 

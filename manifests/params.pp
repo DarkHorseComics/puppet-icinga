@@ -47,6 +47,8 @@ class icinga::params {
   $web_ui_refresh_rate = "90"
   #How many results in large lists of hosts, services or check results to display per page: 
   $web_ui_results_per_page_limit = "200"
+  #The character to use as a delimiter in CSV files that are exported:
+  $exported_csv_delimiter_char   = ";"
 
   ##################
   # Package parameters
