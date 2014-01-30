@@ -6,11 +6,15 @@
 
 class icinga::params {
  
+ 
+  ##############################
+  # Configuration parameters
+  ##############################
+ 
   ##################
-  #Database settings
-  ##################
+  # Database settings
   
-  #server_db_password is left blank deliberately.
+  #The server_db_password is left blank deliberately.
   #Since putting database passwords in your manifests/modules is a bad idea,
   #you should get the DB password via a Hiera lookup.
   $server_db_type       = 'pgsql'
@@ -21,9 +25,13 @@ class icinga::params {
   $server_db_name       = 'icinga'
   
   ##################
-  #Icinga settings
-  ##################
+  # Icinga settings
   
   $icingaadmin_password = 'horsebatterystaple'
+  
+  ##################
+  # Package parameters
+
+
 
 }
