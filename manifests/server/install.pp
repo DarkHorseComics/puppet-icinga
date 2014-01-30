@@ -38,40 +38,11 @@ class icinga::server::install::repos {
 #Packages
 ##################
 class icinga::server::install::packages {
-  
-  #Pick the right list of packages
-  case $operatingsystem {
-    #Red Hat/CentOS systems:
-    'RedHat', 'CentOS': {
-      #Pick the right DB lib package name based on the database type the user selected:
-      case $icinga::params::server_db_type {
-        'mysql':    { $lib_db_package = 'icinga-idoutils-libdbi-mysql'}
-        'pgsql': { $lib_db_package = 'icinga-idoutils-libdbi-pgsql'}
-        default: { fail("${icinga::params::server_db_type} is not supported!") }
-      }
-      
-      $package_provider = 'yum'
-    } 
-    #Debian/Ubuntu systems: 
-    /^(Debian|Ubuntu)$/: {
-      #Pick the right DB lib package name based on the database type the user selected:
-      case $icinga::params::server_db_type {
-        'mysql':    { $lib_db_package = 'libdbd-mysql'}
-        'pgsql': { $lib_db_package = 'libdbd-pgsql'}
-        default: { fail("${icinga::params::server_db_type} is not supported!") } 
-      }
-      
-      $package_provider = 'apt'
-      $icinga_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
-    }
-    #Fail if we're on any other OS:
-    default: { fail("${operatingsystem} is not supported!") } 
-  }
 
-  #Install the packages we specified above:
-  package {$icinga_packages:
+  #Install the packages we specified in the ::params class:
+  package {$icinga::params::icinga_packages:
     ensure   => installed,
-    provider => $package_provider,
+    provider => $icinga::params::package_provider,
   }
 
 }

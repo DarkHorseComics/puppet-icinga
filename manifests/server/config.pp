@@ -21,21 +21,9 @@ class icinga::server::config {
   file { '/etc/icinga/htpasswd.users':
     path    => '/etc/icinga/htpasswd.users',
     ensure  => file,
-    owner   => 'www-data',
-    group   => 'www-data',
+    owner   => $icinga::params::htpasswdusers_owner,
+    group   => $icinga::params::htpasswdusers_group,
     mode    => '644',
-  }
-
-  case $operatingsystem {
-    #File and template variable names for Red Had/CentOS systems:
-    'RedHat', 'CentOS': {}
-    #File and template variable names for Debian/Ubuntu systems:
-    /^(Debian|Ubuntu)$/: {
-      $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
-      $ido2db_cfg_template = "icinga/ubuntu_ido2db.cfg.erb"
-    }
-    #Fail if we're on any other OS:
-    default: { fail("${operatingsystem} is not supported!") }
   }
 
   #/etc/default/icinga resource
@@ -45,7 +33,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '644',
-    content => template($etc_default_template),
+    content => template($icinga::params::etc_default_template),
   }
 
   #/etc/icinga/icinga.cfg resource
@@ -65,7 +53,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '600',
-    content => template($ido2db_cfg_template),
+    content => template($icinga::params::ido2db_cfg_template),
   }
   
   #/etc/icinga/modules/idoutils.cfg
