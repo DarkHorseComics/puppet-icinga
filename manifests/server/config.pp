@@ -77,6 +77,7 @@ class icinga::server::config {
   }
   
   #/etc/icinga/cgi.cfg
+  #This file sets up things for the classic CGI-based web UI.
   file { '/etc/icinga/cgi.cfg':
     path    => '/etc/icinga/cgi.cfg',
     ensure  => file,
