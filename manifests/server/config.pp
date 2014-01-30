@@ -75,4 +75,88 @@ class icinga::server::config {
     mode    => '644',
     content => template('icinga/idomod.cfg.erb'),
   }
+  
+  #/etc/icinga/cgi.cfg
+  #This file sets up things for the classic CGI-based web UI.
+  file { '/etc/icinga/cgi.cfg':
+    path    => '/etc/icinga/cgi.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template('icinga/cgi.cfg.erb'),
+  }
+
+  #This folder is the base of where all of Icinga's objects are kept:
+  file { '/etc/icinga/objects':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for command definitions:
+  file { '/etc/icinga/objects/commands':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for contact definitions:
+  file { '/etc/icinga/objects/contacts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for host definitions:
+  file { '/etc/icinga/objects/hosts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for hostgroup definitions:
+  file { '/etc/icinga/objects/hostgroups':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for service definitions:
+  file { '/etc/icinga/objects/services':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for service group definitions:
+  file { '/etc/icinga/objects/servicegroups':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for template definitions:
+  file { '/etc/icinga/objects/templates':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
+  #A folder for image icon files:
+  file { '/etc/icinga/objects/icons':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
+
 }

@@ -25,6 +25,8 @@ class icinga::params {
   
   ##################
   # Icinga settings
+  #The default icingaadmin password.
+  #Default value from: https://xkcd.com/936/
   $icingaadmin_password = 'horsebatterystaple'
   
   case $operatingsystem {
@@ -35,12 +37,21 @@ class icinga::params {
       $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
       $ido2db_cfg_template  = "icinga/ubuntu_ido2db.cfg.erb"
       $htpasswdusers_owner  = "www-data"
-      $htpasswdusers_group = "www-data"
+      $htpasswdusers_group  = "www-data"
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
   }
-  
+
+  ##################
+  # Icinga web parameters
+  #How often to automatically refresh the web UI, in seconds: 
+  $web_ui_refresh_rate = "90"
+  #How many results in large lists of hosts, services or check results to display per page: 
+  $web_ui_results_per_page_limit = "200"
+  #The character to use as a delimiter in CSV files that are exported:
+  $exported_csv_delimiter_char   = ";"
+
   ##################
   # Package parameters
   case $operatingsystem {
