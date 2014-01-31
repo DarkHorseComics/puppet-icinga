@@ -6,6 +6,11 @@
 
 class icinga::client (
 
+  $nrpe_listen_port        = $icinga::params::nrpe_listen_port,
+  $nrpe_debug_level        = $icinga::params::nrpe_debug_level,
+  $nrpe_command_timeout    = $icinga::params::nrpe_command_timeout,
+  $nrpe_connection_timeout = $icinga::params::nrpe_connection_timeout
+
 ) inherits icinga::params {
   
   #Apply our classes in the right order. Use the squiggly arrows (~>) to ensure that the 
