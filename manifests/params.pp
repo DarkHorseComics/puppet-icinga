@@ -92,7 +92,7 @@ class icinga::params {
   case $operatingsystem {
     #Daemon names for Red Had/CentOS systems:
     'RedHat', 'CentOS': {
-      $nrpe_daemon_name     = 'nrpe'
+      $nrpe_daemon_name = 'nrpe'
     }
     #Daemon names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
