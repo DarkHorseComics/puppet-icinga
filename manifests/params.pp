@@ -45,14 +45,14 @@ class icinga::params {
 
   ##################
   # Icinga client settings 
-  
   $nrpe_listen_port        = '5666'
-  $nrpe_log_facility        = 'daemon'
+  $nrpe_log_facility       = 'daemon'
   $nrpe_debug_level        = '0'
   #in seconds:
   $nrpe_command_timeout    = '60'
   #in seconds:
   $nrpe_connection_timeout = '300'
+  $nrpe_allowed_hosts      = '127.0.0.1'
    
   case $operatingsystem {
     #File and template variable names for Red Had/CentOS systems:
