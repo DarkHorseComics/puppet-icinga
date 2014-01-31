@@ -38,8 +38,7 @@ log_facility=daemon
 # number.  The file is only written if the NRPE daemon is started by the root
 # user and is running in standalone mode.
 
-pid_file=/var/run/nagios/nrpe.pid
-
+pid_file=<%= scope.lookupvar('icinga::server::nrpe_pid_file_path') %>
 
 
 # PORT NUMBER
@@ -66,7 +65,7 @@ server_port=5666
 # 
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-nrpe_user=nagios
+nrpe_user=<%= scope.lookupvar('icinga::server::nrpe_user') %>
 
 
 
@@ -76,7 +75,7 @@ nrpe_user=nagios
 # 
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-nrpe_group=nagios
+nrpe_group=<%= scope.lookupvar('icinga::server::nrpe_group') %>
 
 
 
@@ -139,7 +138,7 @@ dont_blame_nrpe=0
 # syslog facility.
 # Values: 0=debugging off, 1=debugging on
 
-debug=0
+debug=<%= scope.lookupvar('icinga::server::nrpe_debug_level') %>
 
 
 
@@ -147,7 +146,7 @@ debug=0
 # This specifies the maximum number of seconds that the NRPE daemon will
 # allow plugins to finish executing before killing them off.
 
-command_timeout=60
+command_timeout=<%= scope.lookupvar('icinga::server::nrpe_command_timeout') %>
 
 
 
@@ -158,7 +157,7 @@ command_timeout=60
 # all network sessions are connected. This causes the nrpe daemons to
 # accumulate, eating system resources. Do not set this too low.
 
-connection_timeout=300
+connection_timeout=<%= scope.lookupvar('icinga::server::nrpe_connection_timeout') %>
 
 
 
@@ -213,11 +212,11 @@ connection_timeout=300
 
 # The following examples use hardcoded command arguments...
 
-command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
-command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
-command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda1
-command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
-command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200 
+#command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
+#command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
+#command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda1
+#command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
+#command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200 
 
 
 # The following examples allow user-supplied arguments and can
@@ -234,7 +233,7 @@ command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
 #
 # local configuration:
 #	if you'd prefer, you can instead place directives here
-include=/etc/nagios/nrpe_local.cfg
+#include=/etc/nagios/nrpe_local.cfg
 
 # 
 # you can place your config snipplets into nrpe.d/
