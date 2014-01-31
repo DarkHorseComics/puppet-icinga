@@ -66,6 +66,8 @@ class icinga::params {
       
       #Pick the right pacakage provider:
       $package_provider = 'yum'
+      #Finally, pick the right list of packages:
+      $icinga_client_packages = ["nagios-nrpe", "nagios-plugins-nrpe", "nagios-plugins-all"]
     } 
     #Debian/Ubuntu systems: 
     /^(Debian|Ubuntu)$/: {
