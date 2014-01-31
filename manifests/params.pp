@@ -78,7 +78,8 @@ class icinga::params {
       #Pick the right pacakage provider:
       $package_provider = 'apt'
       #Finally, pick the right list of packages:
-      $icinga_server_packages  = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
+      $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
+      $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins"]
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
