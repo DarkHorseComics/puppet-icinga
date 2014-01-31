@@ -46,7 +46,7 @@ pid_file=<%= scope.lookupvar('icinga::client::nrpe_pid_file_path') %>
 # NOTE: This must be a non-priviledged port (i.e. > 1024).
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-server_port=5666
+server_port=<%= scope.lookupvar('icinga::client::nrpe_listen_port') %>
 
 
 
