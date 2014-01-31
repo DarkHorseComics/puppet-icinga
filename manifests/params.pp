@@ -31,22 +31,13 @@ class icinga::params {
   
   case $operatingsystem {
     #File and template variable names for Red Had/CentOS systems:
-    'RedHat', 'CentOS': {
-      $nrpe_config_basedir = "/etc/nagios"
-      $nrpe_pid_file_path  = "/var/run/nrpe/nrpe.pid"
-      $nrpe_user           = "nrpe"
-      $nrpe_group          = "nrpe"
-    }
+    'RedHat', 'CentOS': {}
     #File and template variable names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
       $etc_default_template = "icinga/ubuntu_etc-default-icinga.erb"
       $ido2db_cfg_template  = "icinga/ubuntu_ido2db.cfg.erb"
       $htpasswdusers_owner  = "www-data"
       $htpasswdusers_group  = "www-data"
-      $nrpe_config_basedir  = "/etc/nagios"
-      $nrpe_pid_file_path   = "/var/run/nagios/nrpe.pid"
-      $nrpe_user            = "nagios"
-      $nrpe_group           = "nagios"
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
