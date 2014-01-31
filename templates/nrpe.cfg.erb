@@ -29,7 +29,7 @@
 # LOG FACILITY
 # The syslog facility that should be used for logging purposes.
 
-log_facility=daemon
+log_facility=<%= scope.lookupvar('icinga::client::nrpe_log_facility') %>
 
 
 

@@ -47,6 +47,7 @@ class icinga::params {
   # Icinga client settings 
   
   $nrpe_listen_port        = '5666'
+  $nrpe_log_facility        = 'daemon'
   $nrpe_debug_level        = '0'
   #in seconds:
   $nrpe_command_timeout    = '60'
