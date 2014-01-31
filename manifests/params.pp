@@ -24,7 +24,7 @@ class icinga::params {
   $server_db_name       = 'icinga'
   
   ##################
-  # Icinga settings
+  # Icinga server settings
   #The default icingaadmin password.
   #Default value from: https://xkcd.com/936/
   $icingaadmin_password = 'horsebatterystaple'
@@ -38,6 +38,36 @@ class icinga::params {
       $ido2db_cfg_template  = "icinga/ubuntu_ido2db.cfg.erb"
       $htpasswdusers_owner  = "www-data"
       $htpasswdusers_group  = "www-data"
+    }
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") }
+  }
+
+  ##################
+  # Icinga client settings 
+  $nrpe_listen_port        = '5666'
+  $nrpe_log_facility       = 'daemon'
+  $nrpe_debug_level        = '0'
+  #in seconds:
+  $nrpe_command_timeout    = '60'
+  #in seconds:
+  $nrpe_connection_timeout = '300'
+  $nrpe_allowed_hosts      = '127.0.0.1'
+   
+  case $operatingsystem {
+    #File and template variable names for Red Had/CentOS systems:
+    'RedHat', 'CentOS': {
+      $nrpe_config_basedir = "/etc/nagios"
+      $nrpe_pid_file_path  = "/var/run/nrpe/nrpe.pid"
+      $nrpe_user           = "nrpe"
+      $nrpe_group          = "nrpe"
+    }
+    #File and template variable names for Debian/Ubuntu systems:
+    /^(Debian|Ubuntu)$/: {
+      $nrpe_config_basedir  = "/etc/nagios"
+      $nrpe_pid_file_path   = "/var/run/nagios/nrpe.pid"
+      $nrpe_user            = "nagios"
+      $nrpe_group           = "nagios"
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
@@ -66,6 +96,8 @@ class icinga::params {
       
       #Pick the right pacakage provider:
       $package_provider = 'yum'
+      #Finally, pick the right list of packages:
+      $icinga_client_packages = ["nrpe", "nagios-plugins-nrpe", "nagios-plugins-all"]
     } 
     #Debian/Ubuntu systems: 
     /^(Debian|Ubuntu)$/: {
@@ -78,7 +110,8 @@ class icinga::params {
       #Pick the right pacakage provider:
       $package_provider = 'apt'
       #Finally, pick the right list of packages:
-      $icinga_packages  = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
+      $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
+      $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins"]
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") } 
@@ -88,10 +121,13 @@ class icinga::params {
   # Service parameters
   case $operatingsystem {
     #Daemon names for Red Had/CentOS systems:
-    'RedHat', 'CentOS': {}
+    'RedHat', 'CentOS': {
+      $nrpe_daemon_name = 'nrpe'
+    }
     #Daemon names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
-      $service_names = ["icinga", "ido2db"]
+      $server_service_names = ["icinga", "ido2db"]
+      $nrpe_daemon_name     = 'nagios-nrpe-server'
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
