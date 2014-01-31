@@ -15,5 +15,13 @@ inherits icinga::params {
     group   => 'root',
     mode    => '755',
   }
+  
+  #The folder that will hold our command definition files:
+  file { '/etc/nagios/nrpe.d':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+  }
 
 }
