@@ -91,10 +91,13 @@ class icinga::params {
   # Service parameters
   case $operatingsystem {
     #Daemon names for Red Had/CentOS systems:
-    'RedHat', 'CentOS': {}
+    'RedHat', 'CentOS': {
+      $nrpe_daemon_name     = 'nrpe'
+    }
     #Daemon names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
       $server_service_names = ["icinga", "ido2db"]
+      $nrpe_daemon_name     = 'nagios-nrpe-server'
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
