@@ -3,7 +3,7 @@
 # This subclass installs packages Icinga client machines.
 #
 
-class icinga::client::install () 
+class icinga::client::install
 inherits icinga::params {
   
   #Apply our subclasses in the right order. Use the squiggly arrows (~>) to ensure that the 
@@ -28,7 +28,11 @@ class icinga::client::install::repos {
 ##################
 class icinga::client::install::packages {
 
-    #package resources here
+  #Install the packages we specified in the ::params class:
+  package {$icinga::params::icinga_client_packages:
+    ensure   => installed,
+    provider => $icinga::params::package_provider,
+  }
 
 }
 
