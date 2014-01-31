@@ -24,4 +24,14 @@ inherits icinga::params {
     mode    => '755',
   }
 
+  #File resource for /etc/nagios/nrpe.cfg
+  file { '/etc/nagios/nrpe.cfg':
+    path    => '/etc/nagios/nrpe.cfg',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '644',
+    content => template('icinga/nrpe.cfg.erb'),
+  }
+
 }
