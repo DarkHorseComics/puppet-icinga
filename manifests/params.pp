@@ -24,7 +24,7 @@ class icinga::params {
   $server_db_name       = 'icinga'
   
   ##################
-  # Icinga settings
+  # Icinga server settings
   #The default icingaadmin password.
   #Default value from: https://xkcd.com/936/
   $icingaadmin_password = 'horsebatterystaple'
@@ -43,6 +43,34 @@ class icinga::params {
       $ido2db_cfg_template  = "icinga/ubuntu_ido2db.cfg.erb"
       $htpasswdusers_owner  = "www-data"
       $htpasswdusers_group  = "www-data"
+      $nrpe_config_basedir  = "/etc/nagios"
+      $nrpe_pid_file_path   = "/var/run/nagios/nrpe.pid"
+      $nrpe_user            = "nagios"
+      $nrpe_group           = "nagios"
+    }
+    #Fail if we're on any other OS:
+    default: { fail("${operatingsystem} is not supported!") }
+  }
+
+  ##################
+  # Icinga client settings 
+  
+  $nrpe_debug_level        = '0'
+  #in seconds:
+  $nrpe_command_timeout    = '60'
+  #in seconds:
+  $nrpe_connection_timeout = '300'
+   
+  case $operatingsystem {
+    #File and template variable names for Red Had/CentOS systems:
+    'RedHat', 'CentOS': {
+      $nrpe_config_basedir = "/etc/nagios"
+      $nrpe_pid_file_path  = "/var/run/nrpe/nrpe.pid"
+      $nrpe_user           = "nrpe"
+      $nrpe_group          = "nrpe"
+    }
+    #File and template variable names for Debian/Ubuntu systems:
+    /^(Debian|Ubuntu)$/: {
       $nrpe_config_basedir  = "/etc/nagios"
       $nrpe_pid_file_path   = "/var/run/nagios/nrpe.pid"
       $nrpe_user            = "nagios"
