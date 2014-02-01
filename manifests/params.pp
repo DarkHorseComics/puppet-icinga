@@ -52,7 +52,8 @@ class icinga::params {
   $nrpe_command_timeout    = '60'
   #in seconds:
   $nrpe_connection_timeout = '300'
-  $nrpe_allowed_hosts      = '127.0.0.1'
+  #Note: because we use .join in the nrpe.cfg.erb template, this value *must* be an array 
+  $nrpe_allowed_hosts      = ['127.0.0.1',]
    
   case $operatingsystem {
     #File and template variable names for Red Had/CentOS systems:
