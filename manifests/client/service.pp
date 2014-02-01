@@ -13,6 +13,7 @@ class icinga::client::service {
   service {$icinga::params::nrpe_daemon_name:
     ensure    => running,
     enable    => true, #Enable the service to start on system boot
+    require   => Package[$icinga::params::icinga_client_packages],
     subscribe => Class['icinga::client::config'], #Subscribe to the client::config class so the service gets restarted if any config files change
   }
 

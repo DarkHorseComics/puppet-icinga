@@ -14,6 +14,7 @@ inherits icinga::params {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    require   => Package[$icinga::params::icinga_client_packages],
   }
   
   #The folder that will hold our command definition files:
@@ -22,6 +23,7 @@ inherits icinga::params {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    require   => Package[$icinga::params::icinga_client_packages],
   }
 
   #File resource for /etc/nagios/nrpe.cfg
@@ -32,6 +34,7 @@ inherits icinga::params {
     group   => 'root',
     mode    => '644',
     content => template('icinga/nrpe.cfg.erb'),
+    require   => Package[$icinga::params::icinga_client_packages],
   }
 
 }
