@@ -300,7 +300,7 @@ lowercase_user_name=0
 
 <%= scope.lookupvar('icinga::server::server_users').join(',') %>
 
-authorized_for_system_information=icingaadmin
+authorized_for_system_information=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
 #authorized_contactgroup_for_system_information=
 
 
@@ -315,7 +315,7 @@ authorized_for_system_information=icingaadmin
 # Alternatively you can specify contactgroups too, starting
 # with Icinga 1.5.0
 
-authorized_for_configuration_information=icingaadmin
+authorized_for_configuration_information=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
 #authorized_contactgroup_for_configuration_information=
 
 
@@ -329,7 +329,7 @@ authorized_for_configuration_information=icingaadmin
 # data.
 # Alternatively you can specify contactgroups too.
 
-authorized_for_full_command_resolution=icingaadmin
+authorized_for_full_command_resolution=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
 #authorized_contactgroup_for_full_command_resolution=
 
 
@@ -345,7 +345,7 @@ authorized_for_full_command_resolution=icingaadmin
 # Alternatively you can specify contactgroups too, starting
 # with Icinga 1.5.0
 
-authorized_for_system_commands=icingaadmin
+authorized_for_system_commands=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
 #authorized_contactgroup_for_system_commands=
 
 
@@ -362,8 +362,8 @@ authorized_for_system_commands=icingaadmin
 # NOTE: Users in authorized_for_all_hosts are also automatically
 # authorised to view information for all services.
 
-authorized_for_all_services=icingaadmin
-authorized_for_all_hosts=icingaadmin
+authorized_for_all_services=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
+authorized_for_all_hosts=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
 #authorized_contactgroup_for_all_services=
 #authorized_contactgroup_for_all_hosts=
 
@@ -382,8 +382,8 @@ authorized_for_all_hosts=icingaadmin
 # NOTE: Users in authorized_for_all_host_commands are also automatically
 # authorised to issue commands for all services.
 
-authorized_for_all_service_commands=icingaadmin
-authorized_for_all_host_commands=icingaadmin
+authorized_for_all_service_commands=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
+authorized_for_all_host_commands=<%= scope.lookupvar('icinga::server::server_users').join(',') %>
 #authorized_contactgroup_for_all_service_commands=
 #authorized_contactgroup_for_all_host_commands=
 
