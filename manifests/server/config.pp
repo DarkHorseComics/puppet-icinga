@@ -8,17 +8,17 @@ class icinga::server::config {
 
   include icinga::params
 
-  #The 'icingaadmin' user
-  icinga::server::user { 'icingaadmin':
-    password => $icinga::params::icingaadmin_password,
-  }
-
   file { '/etc/icinga/htpasswd.users':
     path    => '/etc/icinga/htpasswd.users',
     ensure  => file,
     owner   => $icinga::params::htpasswdusers_owner,
     group   => $icinga::params::htpasswdusers_group,
     mode    => '644',
+  }
+
+  #The 'icingaadmin' user
+  icinga::server::user { 'icingaadmin':
+    password => $icinga::params::icingaadmin_password,
   }
 
   #/etc/default/icinga resource
