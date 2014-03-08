@@ -297,6 +297,9 @@ lowercase_user_name=0
 # Alternatively you can specify contactgroups too, starting
 # with Icinga 1.5.0
 
+
+<%= scope.lookupvar('icinga::server::server_users').join(',') %>
+
 authorized_for_system_information=icingaadmin
 #authorized_contactgroup_for_system_information=
 
