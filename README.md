@@ -79,6 +79,46 @@ This module currently does not set up any Apache virtual host for Icinga.
 
 ##Usage
 
+###Server
+
+To set up an Icinga monitoring server, first set up a Postgres database:
+
+<pre>
+  class { 'postgresql::server': }
+
+  postgresql::server::db { 'icinga':
+    user     => 'icingaidoutils',
+    password => postgresql_password('icingaidoutils', 'password'),
+  }
+</pre>
+
+To set up Icinga itself, include the `icinga::server` class with a `server_db_password` parameter. Make sure `server_db_password` matches what you set above when you created the database.
+
+<pre>
+  class { 'icinga::server':
+    server_db_password => 'password',
+  }
+</pre>
+
+To add Icinga Web users, use the `icinga::server::user` defined type:
+
+<pre>
+  icinga::server::user { 'nick2':
+    password => 'password1', 
+  }
+</pre>
+
+To allow Icinga Web users access to view, trigger and schedule host and service checks, add their username to the `server_users` parameter of the `::server` class:
+
+<pre>
+  class { 'icinga::server':
+    server_db_password => 'password',
+    server_users => ['icingaadmin', 'nick2', 'nick'],
+  }
+</pre>
+
+###Clients
+
 Coming soon...
 
 ##Implementation
