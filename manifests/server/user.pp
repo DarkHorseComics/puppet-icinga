@@ -13,6 +13,7 @@ define icinga::server::user (
   $password     = undef,
 ) {
 
+  #Use the httpauth module to do most of the heavy lifting:
   httpauth { $username:
     file      => '/etc/icinga/htpasswd.users',
     password  => $password,
