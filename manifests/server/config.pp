@@ -163,6 +163,15 @@ class icinga::server::config {
     recurse => true,
   }
 
+  #A folder for timeperiod definitions:
+  file { '/etc/icinga/objects/timeperiods':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    recurse => true,
+  }
+
   #A folder for image icon files:
   file { '/etc/icinga/objects/icons':
     ensure  => directory,
