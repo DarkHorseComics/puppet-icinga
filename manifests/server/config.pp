@@ -127,6 +127,15 @@ class icinga::server::config {
     recurse => true,
   }
 
+  #A folder for host dependency definitions:
+  file { '/etc/icinga/objects/hostdependencies':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    recurse => true,
+  }
+
   #A folder for host escalation definitions:
   file { '/etc/icinga/objects/hostescalations':
     ensure  => directory,
