@@ -20,7 +20,6 @@ define icinga::server::user (
     realm     => 'realm',
     mechanism => basic,
     ensure    => present,
-    require   => Class['icinga::server::config'],
     notify    => File['/etc/icinga/htpasswd.users'],
   }
 
