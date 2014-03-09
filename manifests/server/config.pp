@@ -109,6 +109,15 @@ class icinga::server::config {
     recurse => true,
   }
 
+  #A folder for contact group definitions:
+  file { '/etc/icinga/objects/contactgroups':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    recurse => true,
+  }
+
   #A folder for host definitions:
   file { '/etc/icinga/objects/hosts':
     ensure  => directory,
