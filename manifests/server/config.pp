@@ -172,6 +172,15 @@ class icinga::server::config {
     recurse => true,
   }
 
+  #A folder for service dependency definitions:
+  file { '/etc/icinga/objects/servicedependencies':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    recurse => true,
+  }
+
   #A folder for service group definitions:
   file { '/etc/icinga/objects/servicegroups':
     ensure  => directory,
