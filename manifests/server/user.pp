@@ -23,6 +23,4 @@ define icinga::server::user (
     notify    => File['/etc/icinga/htpasswd.users'],
   }
 
-
-
 }

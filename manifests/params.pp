@@ -60,6 +60,7 @@ class icinga::params {
     #File and template variable names for Red Had/CentOS systems:
     'RedHat', 'CentOS': {
       $nrpe_config_basedir = "/etc/nagios"
+      $nrpe_plugin_liddir  = "/usr/lib64/nagios/plugins"
       $nrpe_pid_file_path  = "/var/run/nrpe/nrpe.pid"
       $nrpe_user           = "nrpe"
       $nrpe_group          = "nrpe"
@@ -67,6 +68,7 @@ class icinga::params {
     #File and template variable names for Debian/Ubuntu systems:
     /^(Debian|Ubuntu)$/: {
       $nrpe_config_basedir  = "/etc/nagios"
+      $nrpe_plugin_liddir   = "/usr/lib/nagios/plugins"
       $nrpe_pid_file_path   = "/var/run/nagios/nrpe.pid"
       $nrpe_user            = "nagios"
       $nrpe_group           = "nagios"
