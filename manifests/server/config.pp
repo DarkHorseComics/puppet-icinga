@@ -7,16 +7,6 @@
 class icinga::server::config {
 
   include icinga::params
-  
-  #Create an htpasswd entry for the 'icingaadmin' user. This requires the httpauth module
-  #to be installed: https://github.com/jamtur01/puppet-httpauth
-  httpauth { 'icingaadmin':
-    file      => '/etc/icinga/htpasswd.users',
-    password  => $icinga::params::icingaadmin_password,
-    realm     => 'realm',
-    mechanism => basic,
-    ensure    => present,
-  }
 
   file { '/etc/icinga/htpasswd.users':
     path    => '/etc/icinga/htpasswd.users',
@@ -24,6 +14,11 @@ class icinga::server::config {
     owner   => $icinga::params::htpasswdusers_owner,
     group   => $icinga::params::htpasswdusers_group,
     mode    => '644',
+  }
+
+  #The 'icingaadmin' user
+  icinga::server::user { 'icingaadmin':
+    password => $icinga::params::icingaadmin_password,
   }
 
   #/etc/default/icinga resource

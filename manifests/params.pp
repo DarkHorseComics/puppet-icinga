@@ -22,6 +22,7 @@ class icinga::params {
   $server_db_user       = 'icingaidoutils'
   $server_db_password   = undef
   $server_db_name       = 'icinga'
+  $server_users         = ['icingaadmin']
   
   ##################
   # Icinga server settings
