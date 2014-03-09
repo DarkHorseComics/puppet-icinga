@@ -88,6 +88,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for command definitions:
@@ -96,6 +97,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for contact definitions:
@@ -104,6 +106,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for host definitions:
@@ -112,6 +115,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for hostgroup definitions:
@@ -120,6 +124,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for service definitions:
@@ -128,6 +133,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for service group definitions:
@@ -136,6 +142,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for template definitions:
@@ -144,6 +151,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
   #A folder for image icon files:
@@ -152,6 +160,7 @@ class icinga::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '755',
+    recurse => true,
   }
 
 }
