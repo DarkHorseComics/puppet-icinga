@@ -190,6 +190,15 @@ class icinga::server::config {
     recurse => true,
   }
 
+  #A folder for service extended info definitions:
+  file { '/etc/icinga/objects/serviceextinfo':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    recurse => true,
+  }
+
   #A folder for service group definitions:
   file { '/etc/icinga/objects/servicegroups':
     ensure  => directory,
