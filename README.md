@@ -123,7 +123,17 @@ To allow Icinga Web users access to view, trigger and schedule host and service 
 
 ###Clients
 
-Coming soon...
+####Distributing plugin scripts
+
+To disbribute plugin scripts to your client machines, add the script file to your Puppet master and use the `icinga::client::plugin` defined type:
+
+<pre>
+icinga::client::plugin { 'check_omreport_raid':
+  source_file => 'puppet:///modules/icinga/check_omreport_raid.pl',
+}
+</pre>
+
+For `source_file`, you can use any format of file URL that Puppet will understand. See the [Puppet file type reference](http://docs.puppetlabs.com/references/3.stable/type.html#file-attribute-source) for more info.
 
 ##Implementation
 
