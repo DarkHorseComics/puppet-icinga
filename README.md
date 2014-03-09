@@ -108,7 +108,7 @@ To add Icinga Web users, use the `icinga::server::user` defined type:
   }
 </pre>
 
-**Note:** Because the `htpasswd` Icinga uses for authentication won't be created until you install Icinga, you'll have to declare the `icinga::server` class on a node to install Icinga first before you can delcare any `icinga::server::user`s. 
+**Note:** Because the `htpasswd` Icinga uses for authentication won't be created until you install Icinga, you'll have to declare the `icinga::server` class on a node to install Icinga first before you can delcare any `icinga::server::user` resources. 
 
 If you have **both** `icinga::server` and `icinga::server::user` declared in your site manifest, you'll have to do 2 Puppet runs initially, one to install Icinga and create the `htpasswd` file and another one to populate the `icinga::server::user` in that file.
 
