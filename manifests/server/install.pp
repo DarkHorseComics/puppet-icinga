@@ -40,7 +40,7 @@ class icinga::server::install::repos {
 class icinga::server::install::packages {
 
   #Install the packages we specified in the ::params class:
-  package {$icinga::params::icinga_packages:
+  package {$icinga::params::icinga_server_packages:
     ensure   => installed,
     provider => $icinga::params::package_provider,
   }
