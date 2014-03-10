@@ -235,4 +235,93 @@ class icinga::server::config {
     recurse => true,
   }
 
+#The rest of these file resources are actually just commented-out copies of the .cfg files
+#that are included out of the box in Icinga's default install. The originals are getting
+#overwritten by these commented out copies so that any Nagios configs declared by the 
+#user with Puppet's Nagios types don't conflict if they happen to have the same name.
+#The 2 exceptions are the check for ido2db on the Icinga server and the localhost service
+#definitions that monitor basic sergices on the Icinga server. Because those services are
+#necessary for Icinga to function, we'll keep the uncommented versions.
+
+  #File resource for /etc/icinga/objects/contacts_icinga.cfg.erb
+  file {'/etc/icinga/objects/contacts_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/contacts_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/extinfo_icinga.cfg.erb
+  file {'/etc/icinga/objects/extinfo_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/extinfo_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/generic-host_icinga.cfg.erb
+  file {'/etc/icinga/objects/generic-host_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/generic-host_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/generic-service_icinga.cfg.erb
+  file {'/etc/icinga/objects/generic-service_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/generic-service_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/hostgroups_icinga.cfg.erb
+  file {'/etc/icinga/objects/hostgroups_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/hostgroups_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/ido2db_check_proc.cfg.erb
+  file {'/etc/icinga/objects/ido2db_check_proc.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/ido2db_check_proc.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/localhost_icinga.cfg.erb
+  file {'/etc/icinga/objects/localhost_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/localhost_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/services_icinga.cfg.erb
+  file {'/etc/icinga/objects/services_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/services_icinga.cfg.erb'),
+  }
+
+  #File resource for /etc/icinga/objects/timeperiods_icinga.cfg.erb
+  file {'/etc/icinga/objects/timeperiods_icinga.cfg':
+    ensure => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '755',
+    content => template('icinga/timeperiods_icinga.cfg.erb'),
+  }
+
 }
