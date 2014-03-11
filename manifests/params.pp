@@ -101,7 +101,7 @@ class icinga::params {
       #Pick the right pacakage provider:
       $package_provider = 'yum'
       #Finally, pick the right list of packages:
-      $icinga_client_packages = ["nrpe", "nagios-plugins-nrpe", "nagios-plugins-all"]
+      $icinga_client_packages = ["nrpe", "nagios-plugins-nrpe", "nagios-plugins-all", "nagios-plugins-openmanage", "nagios-plugins-check-updates"]
     } 
     #Debian/Ubuntu systems: 
     /^(Debian|Ubuntu)$/: {
@@ -115,10 +115,10 @@ class icinga::params {
       $package_provider = 'apt'
       #Finally, pick the right list of packages:
       $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", $lib_db_package]
-      $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins"]
+      $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib"]
     }
     #Fail if we're on any other OS:
-    default: { fail("${operatingsystem} is not supported!") } 
+    default: { fail("${operatingsystem} is not supported!") }
   }
 
   ##################
