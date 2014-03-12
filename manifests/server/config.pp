@@ -335,6 +335,14 @@ class icinga::server::config {
         mode    => '755',
         content => template('icinga/etc_nagios-plugins_config_check_nrpe.cfg.erb'),
       }
+      
+      file {'/etc/nagios-plugins/config/ssh.cfg':
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '755',
+        content => template('icinga/etc_nagios-plugins_config_ssh.cfg.erb'),
+      }
     }
   }
 
