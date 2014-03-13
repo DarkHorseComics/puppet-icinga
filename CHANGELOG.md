@@ -1,6 +1,11 @@
 #Changelog
 - - -
 
+###v0.4.1
+
+* Fixed a problem where, out-of-the-box the Icinga install wouldn't work because I commented out some required object definitions in the `.cfg` file templates
+* Added object creation examples to the `README`
+
 ###v0.4
 
 * Added client installation and setup

@@ -323,5 +323,27 @@ class icinga::server::config {
     mode    => '755',
     content => template('icinga/timeperiods_icinga.cfg.erb'),
   }
+  
+  #If we're on Ubuntu/Debian, put a check_nrpe.cfg in place that comments out the check_nrpe
+  #command definition so that we can define our own and not have them collide with each other.
+  case $operatingsystem {
+    /^(Debian|Ubuntu)$/: { 
+      file {'/etc/nagios-plugins/config/check_nrpe.cfg':
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '755',
+        content => template('icinga/etc_nagios-plugins_config_check_nrpe.cfg.erb'),
+      }
+      
+      file {'/etc/nagios-plugins/config/ssh.cfg':
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '755',
+        content => template('icinga/etc_nagios-plugins_config_ssh.cfg.erb'),
+      }
+    }
+  }
 
 }

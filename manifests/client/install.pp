@@ -1,6 +1,6 @@
 # Class: icinga::client::install
 #
-# This subclass installs packages Icinga client machines.
+# This subclass installs NRPE and Nagios plugin packages on Icinga client machines.
 #
 
 class icinga::client::install

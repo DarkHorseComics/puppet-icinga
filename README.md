@@ -135,6 +135,128 @@ icinga::client::plugin { 'check_omreport_raid':
 
 For `source_file`, you can use any format of file URL that Puppet will understand. See the [Puppet file type reference](http://docs.puppetlabs.com/references/3.stable/type.html#file-attribute-source) for more info.
 
+###Usage - Creating an object hierarchy
+
+This module will keep a few of the defined objects that come with an out-of-the-box Icinga install:
+
+* a `root` contact
+* an `admins` contact group
+* a `generic-service` service definition template
+* a `generic-host` host definition template
+* a `localhost` host definition for the machine that the `icinga::server` class was applied to
+* A few services for `localhost`, like IDO2DB, current load average, disk usage, users on the system, etc.
+* Timeperiods for 24x7, 9am-5pm M-F work hours, 5pm-8am Sat./Sun. non-work hours and a 'never' time period
+
+For the rest of your object hierarchy, you can define objects with the built-in Puppet Nagios types. Just set the `target =>` parameter to point to one of the object type subdirectories in `/etc/icinga/objects`, along with a filename. The `icinga::server::config` class makes directories in `/etc/icinga/objects` for:
+
+* commands
+* contactgroups
+* contacts
+* hostdependencies
+* hostescalations
+* hostextinfo
+* hostgroups
+* hosts
+* servicedependencies
+* serviceescalations
+* servicegroups
+* services
+* templates
+* timeperiods
+
+As a workaround for bug [PUP-1327](https://tickets.puppetlabs.com/browse/PUP-1327), the `icinga::server::config` class sets the mode of any files created in `/etc/icinga/bojects` to **755** so the Icinga daemon will be able to read them.
+
+####Using the built-in Puppet Nagios types
+
+Below are some examples for how to use the built-in Nagios types with this module. To make any of these a template you can inherit from, add `use => '0'` as a parameter.
+
+**Host definitions**
+
+<pre>
+@@nagios_host { $::fqdn:
+  address => $::ipaddress,
+  check_command => 'check_ping!100.0,20%!500.0,60%',
+  use => 'generic-host',
+  hostgroups => ['ssh_servers'], #Include this machine in the ssh_servers hostgroup
+  target => "/etc/icinga/objects/hosts/host_${::fqdn}.cfg",
+}
+</pre> 
+
+**Note:** The above code is actually put in the site manifest for the **client** machine that's being monitored, not the Icinga server. It's exported by the machine with the `@@` sigils. See [Exported Resources with Nagios](http://docs.puppetlabs.com/guides/exported_resources.html#exported-resources-with-nagios) for more details.
+
+On the site manifest for the Icinga server, add:
+
+<pre>
+#Collect all @@nagios_host resources from PuppetDB that were exported by other machines:
+Nagios_host <<||>> { }
+</pre>
+
+**Hostgroup definitions**
+
+If you have a `hostgroups =>` parameter in your `@@nagios_host` definitions, you can create the actual hostgroup itself:
+
+<pre>
+nagios_hostgroup { 'ssh_servers':
+  ensure         => present,
+  target         => '/etc/icinga/objects/hostgroups/ssh_servers.cfg',
+  hostgroup_name => 'ssh_servers',
+  alias          => 'SSH servers',
+}
+</pre>
+
+**Command definitions**
+
+<pre>
+#Define this command first so that any other services can use it as part of their check commands:
+nagios_command { 'check_nrpe':
+  command_name => 'check_nrpe',
+  ensure       => present,
+  command_line => '$USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$ -t 20',
+  target       => "/etc/icinga/objects/commands/check_nrpe.cfg",
+}
+</pre>
+
+**Service definitions**
+
+For a network-reachable service that can be checked directly from the Icinga server:
+
+<pre>
+#Service definition for checking SSH
+nagios_service { 'check_ssh_service':
+  ensure => present,
+  target => '/etc/icinga/objects/services/check_ssh_service.cfg',
+  use => 'generic-service',
+  hostgroup_name => 'ssh_servers',
+  service_description => 'SSH',
+  check_command => 'check_ssh',
+}
+</pre>
+
+For a non-network-checkable service that requires the use of NRPE on the machine being monitored (this uses the `check_nrpe` command defined in the command example farther above):
+
+<pre>
+#check_zombie_procs
+nagios_service { 'check_zombie_procs':
+  ensure => present,
+  target => '/etc/icinga/objects/services/check_zombie_procs_service.cfg',
+  use => 'generic-service',
+  hostgroup_name => 'ssh_servers',
+  service_description => 'Zombie procs',
+  check_command => 'check_nrpe!check_zombie_procs',
+}
+</pre>
+
+On the machine being monitored, you would need a matching NRPE command definition like this:
+
+<pre>
+#check_zombie_procs
+icinga::client::command { 'check_zombie_procs':
+  nrpe_plugin_name => 'check_procs',
+  nrpe_plugin_args => '-w 5 -c 10 -s Z',
+}
+</pre>
+
+
 ##Implementation
 
 Coming soon...
