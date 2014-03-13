@@ -1,10 +1,8 @@
 # Class: icinga
 #
 # This module manages Icinga. This class is just the entry point for Puppet to get at the
-# subclass(es).
+# subclasses. It doesn't do anything on its own.
 #
 
-class icinga {
-  include icinga::server
-}
+class icinga { }
 
