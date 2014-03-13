@@ -1,6 +1,10 @@
 #Changelog
 - - -
 
+###v0.4.2
+
+* [GH-2](https://github.com/nickchappell/puppet-icinga/tree/fix/GH2/missing-12.04-packages): Fixed an issue where the `nagios-plugins-common` and `nagios-plugins-contrib` packages were not available on Ubuntu 12.04 LTS, but the module tried to install them anway
+
 ###v0.4.1
 
 * Fixed a problem where, out-of-the-box the Icinga install wouldn't work because I commented out some required object definitions in the `.cfg` file templates

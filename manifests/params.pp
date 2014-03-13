@@ -114,8 +114,20 @@ class icinga::params {
       #Pick the right pacakage provider:
       $package_provider = 'apt'
       #Finally, pick the right list of packages:
-      $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib", "nagios-nrpe-plugin", $lib_db_package]
-      $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib"]
+      
+      #Ubuntu 12.04 doesn't have nagios-plugins-common or nagios-plugins-contrib packages available...
+      case $operatingsystemrelease {
+        '12.04': {
+          $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-nrpe-plugin", $lib_db_package]
+          $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra"]
+        
+        }
+        #...but 13.10 does:
+        '13.10': {
+          $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib", "nagios-nrpe-plugin", $lib_db_package]
+          $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib"]
+        }
+      }
     }
     #Fail if we're on any other OS:
     default: { fail("${operatingsystem} is not supported!") }
