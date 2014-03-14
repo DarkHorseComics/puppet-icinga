@@ -188,7 +188,7 @@ On the site manifest for the Icinga server, add:
 
 <pre>
 #Collect all @@nagios_host resources from PuppetDB that were exported by other machines:
-Nagios_host <<||>> { }
+Nagios_host &lt;&lt;||&gt;&gt; { }
 </pre>
 
 **Hostgroup definitions**
