@@ -98,7 +98,7 @@ class icinga::params {
         default: { fail("${icinga::params::server_db_type} is not supported!") }
       }
       
-      #Pick the right pacakage provider:
+      #Pick the right package provider:
       $package_provider = 'yum'
       #Finally, pick the right list of packages:
       $icinga_client_packages = ["nrpe", "nagios-plugins-nrpe", "nagios-plugins-all", "nagios-plugins-openmanage", "nagios-plugins-check-updates"]
@@ -111,7 +111,7 @@ class icinga::params {
         'pgsql': { $lib_db_package = 'libdbd-pgsql'}
         default: { fail("${icinga::params::server_db_type} is not supported!") } 
       }
-      #Pick the right pacakage provider:
+      #Pick the right package provider:
       $package_provider = 'apt'
       #Finally, pick the right list of packages:
       

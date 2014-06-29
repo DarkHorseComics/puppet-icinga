@@ -17,9 +17,9 @@ inherits icinga::params {
 ##################
 #Package repositories
 ##################
-class icinga::client::install::repos { 
+class icinga::client::install::repos {
 
-    #repository resources here
+  #repository resources here
 
 }
 
@@ -42,6 +42,6 @@ class icinga::client::install::packages {
 ##################
 class icinga::client::install::execs { 
 
-    #exec resources here
+  #exec resources here
 
 }
