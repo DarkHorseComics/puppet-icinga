@@ -123,7 +123,7 @@ class icinga::params {
         
         }
         #...but 13.10 does:
-        '13.10': {
+        '13.10', '14.04': {
           $icinga_server_packages = ["icinga", "icinga-doc", "icinga-idoutils", "nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib", "nagios-nrpe-plugin", $lib_db_package]
           $icinga_client_packages = ["nagios-nrpe-server", "nagios-plugins", "nagios-plugins-basic", "nagios-plugins-common", "nagios-plugins-standard", "nagios-snmp-plugins", "nagios-plugins-extra", "nagios-plugins-contrib"]
         }
