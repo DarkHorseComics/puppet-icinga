@@ -74,7 +74,7 @@ class icinga::server::install::execs {
           exec { 'debianubuntu-postgres-schema-load':
             user    => 'root',
             path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
-            command => "su postgres -c 'psql -d icinga < /usr/share/dbconfig-common/data/icinga-idoutils/install/pgsql'; touch /etc/icinga/postgres_schema_loaded.txt",
+            command => "su postgres -c 'export PGPASSWORD='${server_db_password}'; psql -U ${server_db_user} -h ${server_db_host} -d ${server_db_name} < /usr/share/dbconfig-common/data/icinga-idoutils/install/pgsql'; export PGPASSWORD=''; touch /etc/icinga/postgres_schema_loaded.txt",
             creates => "/etc/icinga/postgres_schema_loaded.txt",
             require => Class['icinga::server::install::packages'],
           }
